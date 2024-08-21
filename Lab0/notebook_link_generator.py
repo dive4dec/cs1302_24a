@@ -1,7 +1,7 @@
 from urllib.parse import quote
 import ipywidgets as widgets
 
-def generate_notebook_link(notebook_path):
+def generate_notebook_link(notebook_path, canvas_id):
     """
     Generates a URL for accessing a Jupyter Notebook via a custom link.
 
@@ -13,7 +13,6 @@ def generate_notebook_link(notebook_path):
     """
     # Course parameters
     course_id = "cs1302_24a"
-    canvas_id = "48496"
     
     # Base URLs
     notebook_repo = f"https://github.com/dive4dec/{course_id}"
@@ -54,7 +53,7 @@ def generate_notebook_link(notebook_path):
 """
     return html
 
-def setup_notebook_link_widget():
+def setup_notebook_link_widget(canvas_id):
     """
     Sets up and returns a widget for generating and displaying a notebook link.
 
@@ -66,7 +65,7 @@ def setup_notebook_link_widget():
     """
     # Create a Text widget for input with initial value and description
     text_input = widgets.Text(
-        value='Lab0/Setup.ipynb',
+        value='Lab0/Course_Materials.ipynb',
         description='Notebook path:',
         disabled=False,
         style={'description_width': 'initial'},  # Increase the description length
@@ -75,13 +74,13 @@ def setup_notebook_link_widget():
 
     # Create an HTML widget for displaying the generated link
     html_output = widgets.HTML(
-        value=generate_notebook_link(text_input.value)  # Generate initial link
+        value=generate_notebook_link(text_input.value, canvas_id=canvas_id)  # Generate initial link
     )
 
     # Define a callback function to update the HTML widget upon text input changes
     def update_html(change):
         # Update the HTML widget with the new generated link
-        html_output.value = generate_notebook_link(change['new'])
+        html_output.value = generate_notebook_link(change['new'], canvas_id=canvas_id)
 
     # Attach the callback function to the Text widget to listen for 'value' changes
     text_input.observe(update_html, names='value')
