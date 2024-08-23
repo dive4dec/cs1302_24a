@@ -40,7 +40,7 @@ def generate_notebook_link(notebook_path, canvas_id):
     parts = notebook_path.split('/')
     
     # Extract the lecture part and content part
-    title = parts[0][:-1]
+    title = parts[0]
     subtitle = parts[1].rsplit('.', 1)[0].replace('_', ' ')
 
     html = f"""
