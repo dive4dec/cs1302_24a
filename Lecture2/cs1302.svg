@@ -1,0 +1,37 @@
+<svg width="240" height="50" viewBox="-140 -25 240 50" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      :root .variable {
+        fill: black;
+      }
+      :root .f-string {
+        fill: #770188;
+      }
+      :root text {
+        font-family: monospace;
+        font-size: 12px;
+      }
+    </style>  
+  </defs>
+  
+  <!-- Course code -->
+  <text x="-85" y="-5" text-anchor="start" class="f-string">f"""{<tspan class="variable">yyyy</tspan>}{<tspan class="variable">mm</tspan>}CS1302</text>
+  
+  <!-- Course title -->
+  <text x="-85" y="11" text-anchor="start" class="f-string">Intro to Comp Progm'g"""</text>
+
+  <!-- Jupyter Notebook -->
+  <!-- Cell -->
+  <rect x="-97" y="-23" width="194" height="46" rx="4" ry="4" fill="none" stroke="RoyalBlue" stroke-width="1"></rect>
+    
+  <!-- Cell selection -->
+  <rect x="-137" y="-23" width="5" height="46" rx="2" ry="2" fill="RoyalBlue" stroke="RoyalBlue" stroke-width="1"></rect>  
+    
+  <!-- Cell prompt -->
+  <text x="-100" y="-5" text-anchor="end" font-size="12" fill="RoyalBlue">[]:</text>
+      
+  <!-- Blinking cursor -->
+  <rect x="87" y="2" width="1" height="12" fill="black">
+    <animate attributeName="opacity" values="1;0" dur="1s" repeatCount="indefinite" />
+  </rect> 
+</svg>
