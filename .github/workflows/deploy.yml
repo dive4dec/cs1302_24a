@@ -24,7 +24,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           micromamba-version: '1.5.8-0'
-          environment-file: .environment/build_environment.yml
+          environment-file: .environments/build_environment.yml
           cache-environment: true
 
       - name: Build the JupyterLite site
@@ -33,7 +33,7 @@ jobs:
           mkdir content
           mv Lab* content/
           mv Lecture* content/
-          jupyter lite build --XeusPythonEnv.environment_file=.environment/environment.yml --contents content --output-dir dist
+          jupyter lite build --XeusPythonEnv.environment_file=.environments/environment.yml --contents content --output-dir dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
