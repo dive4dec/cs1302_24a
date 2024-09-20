@@ -2,7 +2,7 @@ name: build-env
 channels:
   - conda-forge
 dependencies:
-  - python
+  - python=3.11
   - pip
   - jupyter_server
   - jupyterlite-core >=0.4.1,<0.5.0
