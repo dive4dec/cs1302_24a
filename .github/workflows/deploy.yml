@@ -30,8 +30,10 @@ jobs:
       - name: Build the JupyterLite site
         shell: bash -l {0}
         run: |
-          cp README.md content
-          jupyter lite build --contents . --output-dir dist
+          mkdir content
+          mv Lab* content/
+          mv Lecture* content/
+          jupyter lite build --contents content --output-dir dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
