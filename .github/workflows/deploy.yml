@@ -13,28 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-
-      - name: Install mamba
-        uses: mamba-org/setup-micromamba@v1
-        with:
-          micromamba-version: '1.5.8-0'
-          environment-file: .environments/build_environment.yml
-          cache-environment: true
-
+          python-version: '3.11'
+      - name: Install the dependencies
+        run: |
+          python -m pip install -r .jupyterlite/requirements.txt
       - name: Build the JupyterLite site
-        shell: bash -l {0}
         run: |
           mkdir content
-          mv Lab* content/
-          mv Lecture* content/
-          jupyter lite build --XeusPythonEnv.environment_file=".environments/environment.yml" --contents content --output-dir dist
-
+          mv L* content/
+          jupyter lite build --contents content --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
