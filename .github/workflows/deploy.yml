@@ -33,7 +33,7 @@ jobs:
           mkdir content
           mv Lab* content/
           mv Lecture* content/
-          jupyter lite build --XeusPythonEnv.environment_file=.environments/environment.yml --contents content --output-dir dist
+          jupyter lite build --XeusPythonEnv.environment_file=".environments/environment.yml" --contents content --output-dir dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
