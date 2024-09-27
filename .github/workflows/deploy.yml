@@ -24,7 +24,7 @@ jobs:
       - name: Build the JupyterLite site
         run: |
           mkdir content
-          mv * content/
+          find . -maxdepth 1 -mindepth 1 ! -name 'content' ! -name '.*' -exec mv -t content/ {} +
           jupyter lite build --contents content --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
