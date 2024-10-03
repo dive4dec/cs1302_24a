@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Timer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            #display {
+                font-size: 8em;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="timer">
+            <div id="control">
+                <button onclick="start();">start</button>
+                <button onclick="reset();">reset</button>
+		<input type="text" id="hour" name="hour" value="1" maxlength="1" size="1">:
+		<input type="text" id="min" name="min" value="00" maxlength="2" size="2">:00 TOTAL
+            </div>
+            <div id="display">
+                <div id="time"></div>
+                <div id="start"></div>
+                <div id="end"></div>
+                <div id="remaining"></div>
+            </div>
+        </div>
+        <script>
+
+            var time;
+	    var color,diff;
+            function showCurrentTime() {
+                time = new Date();
+                document.getElementById("time").innerHTML=time.toLocaleTimeString();
+		diff = Math.ceil((end_time-time)/(1000*60));
+		color = (diff>15)?"black":(diff>5)?"blue":(diff>0)?"purple":"red";
+		document.getElementById("time").style.color = color;
+                t = setTimeout(function() {
+                    showCurrentTime();
+                }, 500);
+            }
+
+            var start_time = localStorage.getItem("start_time"); 
+	    var hour = Number(localStorage.getItem("hour"));
+            var min = Number(localStorage.getItem("min"));
+            var end_time;
+            showCurrentTime();
+
+            function showStartEndTime() {
+                end_time = new Date(start_time);
+                end_time.setHours(start_time.getHours()+hour);
+                end_time.setMinutes(start_time.getMinutes()+min);
+                document.getElementById("start").innerHTML = start_time.toLocaleTimeString() + " START";
+                document.getElementById("end").innerHTML = end_time.toLocaleTimeString() + " STOP";
+            }
+
+            if (start_time != null) {
+                start_time = new Date(start_time);
+		document.getElementById("hour").value = String(hour);
+		document.getElementById("min").value = String(min);
+                showStartEndTime();
+            }
+
+            function start() {
+                start_time = new Date();
+		hour = Number(document.getElementById("hour").value);
+		min = Number(document.getElementById("min").value);	
+                localStorage.setItem("start_time",start_time); 
+		localStorage.setItem("hour",hour);
+		localStorage.setItem("min",min);
+                showStartEndTime();
+            }
+
+            function reset() {
+                start_time = null;
+                end_time = null;
+                localStorage.removeItem("start_time");
+                document.getElementById("start").innerHTML = "";
+                document.getElementById("end").innerHTML = "";
+            }
+        </script>
+    </body>
+</html>
